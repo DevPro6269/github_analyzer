@@ -1,0 +1,41 @@
+{
+  "info": {
+    "name": "GitHub Analyzer API",
+    "description": "A backend service that analyzes GitHub user profiles and stores insights in MySQL.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "url": "https://githubanalyzer-production-f230.up.railway.app/health",
+        "description": "Check if the server is running."
+      }
+    },
+    {
+      "name": "Analyze GitHub User",
+      "request": {
+        "method": "POST",
+        "url": "https://githubanalyzer-production-f230.up.railway.app/api/analyze/torvalds",
+        "description": "Fetch and store a GitHub user's profile insights. Returns status 'fresh' on new data, 'cached' if analyzed within 24 hours."
+      }
+    },
+    {
+      "name": "List All Analyzed Profiles",
+      "request": {
+        "method": "GET",
+        "url": "https://githubanalyzer-production-f230.up.railway.app/api/profiles",
+        "description": "Returns a summary list of all analyzed GitHub profiles stored in the database."
+      }
+    },
+    {
+      "name": "Get Single Profile",
+      "request": {
+        "method": "GET",
+        "url": "https://githubanalyzer-production-f230.up.railway.app/api/profiles/torvalds",
+        "description": "Returns full stored data for a single analyzed GitHub profile."
+      }
+    }
+  ]
+}

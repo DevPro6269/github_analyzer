@@ -61,8 +61,22 @@ async function fetchAndAnalyze(username) {
   }
 
   const profile = profileRes.data;
-  const reposRes = await axios.get(`${base}/users/${username}/repos?per_page=100`, { headers });
-  const repos = reposRes.data;
+
+  let repos = [];
+  try {
+    const reposRes = await axios.get(`${base}/users/${username}/repos?per_page=100`, { headers });
+    repos = reposRes.data;
+  } catch (err) {
+    if (err.response?.status === 403) {
+      const error = new Error('GitHub rate limit exceeded. Try again later.');
+      error.statusCode = 429;
+      throw error;
+    }
+    const error = new Error('Could not reach GitHub API');
+    error.statusCode = 502;
+    throw error;
+  }
+
   const insights = extractInsights(profile, repos);
 
   return {

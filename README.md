@@ -4,7 +4,7 @@ A Node.js/Express backend that analyzes GitHub user profiles and stores insights
 
 ## Live API
 
-`https://<your-railway-url>`
+`https://githubanalyzer-production-f230.up.railway.app`
 
 ## Tech Stack
 
